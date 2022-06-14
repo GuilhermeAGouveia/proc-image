@@ -12,13 +12,11 @@
 
 void <operacao>(image In, image Out, int nl, int nc, int mn)
 {
-    float T[mn+1];
-    for (int i = 0; i < mn + 1; i++) {
-        T[i] =  T[i] = log(i + 1) / log(mn + 1) * mn;
+    // implemente aqui
+
+    for (int i = 0; i < nl * nc; i++) {
+        Out[i] = In[i];
     }
-    
-    for (int i = 0; i < nl * nc; i++)
-        Out[i] = T[In[i]];
 }
 
 void msg(char *s)
