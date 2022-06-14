@@ -1,0 +1,5 @@
+#/bin/bash
+
+cp -R base $1
+sed -i "s/<operacao>/$2/g" $1/script.c
+sed -i "s/<operacao>/$2/g" $1/makefile
