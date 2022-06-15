@@ -23,5 +23,5 @@ void errormsg(char *, ...);
 image img_alloc(int, int);
 int img_free(image);
 void img_name(char *name, char *in, char *out, int tp);
-image img_get(char *name, int *nr, int *nc, int *ml, int tp);
+image img_get(char *name, int *nr, int *nc, int *ml, int tp, int showInfo);
 void img_put(image img, char *name, int nr, int nc, int ml, int tp);

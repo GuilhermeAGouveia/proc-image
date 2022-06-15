@@ -86,7 +86,7 @@ void errormsg(char *str, ...)
  * Returns:
  *   image vector
  *-------------------------------------------------------------------------+*/
-image img_get(char *name, int *nr, int *nc, int *ml, int tp)
+image img_get(char *name, int *nr, int *nc, int *ml, int tp, int showInfo)
 {
     char lines[100];
     image img;
@@ -124,7 +124,7 @@ image img_get(char *name, int *nr, int *nc, int *ml, int tp)
             img[i] = (r << 16) + (g << 8) + b;
         }
     fclose(fimg);
-    img_info(name, *nr, *nc, *ml, tp);
+    if (showInfo) img_info(name, *nr, *nc, *ml, tp);
     return img;
 }
 
