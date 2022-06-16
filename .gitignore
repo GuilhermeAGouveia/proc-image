@@ -1,5 +1,6 @@
 *
 !*.*
-*/*
+!imagens
+!base
 *.o
 *result*

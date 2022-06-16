@@ -3,4 +3,5 @@
 cp -R base $1
 sed -i "s/<operacao>/$2/g" $1/script.c
 sed -i "s/<operacao>/$2/g" $1/makefile
+echo "$1" >> .gitignore
 mv $1/script.c $1/$2.c
