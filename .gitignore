@@ -4,19 +4,19 @@
 # Aceitando todos os arquivos com extensao
 !*.*
 
+# Aceitando pastas de uso geral
+!_*
+
 # Negando todos os arquivos com extensao .pgm
 *.pgm
 
 # Aceitando todos os arquivos .pgm dentro da pasta imagens
-!imagens/*.pgm
+!_imagens/*.pgm
 
 # Negando todos os arquivos com result no nome (gerados durante o processamento de imagens
 *result*
 
 # Negando todos os arquivos com extensao .o
 *.o
-
-# Aceitando pastas de uso geral
-!_*
 
 # Pastas aceitas
