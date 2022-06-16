@@ -1,6 +1,21 @@
-*
+# Negando tudo (necessário para ignorar os executaveis compilados de arquivos C)
+* 
+
+# Aceitando todos os arquivos com extensao
 !*.*
+
+# Negando todos os arquivos com extensao .pgm
+*.pgm
+
+# Aceitando todos os arquivos .pgm dentro da pasta imagens
+!imagens/*.pgm
+
+# Negando todos os arquivos com result no nome (gerados durante o processamento de imagens
+*result*
+
+# Negando todos os arquivos com extensao .o
+*.o
+
+# Pastas aceitas
 !imagens
 !base
-*.o
-*result*
