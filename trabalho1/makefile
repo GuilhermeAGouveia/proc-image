@@ -17,5 +17,5 @@ $(TARGET): $(OBJECTS);\
 %.o: %.c;\
     $(CC) $(CCFLAGS) -c $<
 
-clean:;\
+clean: ;\
     rm -f *.o *-result.p*m $(TARGET);\

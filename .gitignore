@@ -16,6 +16,7 @@
 # Negando todos os arquivos com extensao .o
 *.o
 
+# Aceitando pastas de uso geral
+!_*
+
 # Pastas aceitas
-!imagens
-!base
