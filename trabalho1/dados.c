@@ -80,13 +80,13 @@ image *loadDados(int nDados)
 {
     int tmp;
     char filename[30];
-    image *loadDados = malloc(nDados * sizeof(image));
+    image *listDados = malloc(nDados * sizeof(image));
     for (int i = 0; i < 7; i++)
     {
         sprintf(filename, "./_dados_img/preto-%d.pgm", i);
-        loadDados[i] = img_get(filename, &tmp, &tmp, &tmp, GRAY, 0);
+        listDados[i] = img_get(filename, &tmp, &tmp, &tmp, GRAY, 0);
     }
-    return loadDados;
+    return listDados;
 }
 
 /**
@@ -149,8 +149,6 @@ void convertIntToDado(image In, image Out, int nl, int nc)
  */
 void dado(image In, image Out, int nl, int nc, int mn, int nlIcone, int ncIcone)
 {
-
-    // Transformando imagem em outra com 100 de largura e um tamanho proporcial na altura
     image Icone = img_alloc(nlIcone, ncIcone);
     iconizar(In, Icone, nl, nc, nlIcone, ncIcone);
     normalizeImage(Icone, nlIcone, ncIcone, 7);
