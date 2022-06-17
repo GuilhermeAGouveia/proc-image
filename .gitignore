@@ -4,11 +4,17 @@
 # Aceitando todos os arquivos com extensao
 !*.*
 
+# Aceitando todos os makefile's
+!makefile
+
 # Aceitando pastas de uso geral
 !_*
 
 # Negando todos os arquivos com extensao .pgm
 *.pgm
+
+# Aceitando o arquivo img.pgm
+!img.pgm
 
 # Aceitando todos os arquivos .pgm dentro da pasta imagens
 !_imagens/*.pgm
