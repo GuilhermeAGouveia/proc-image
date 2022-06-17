@@ -83,7 +83,7 @@ image *loadDados(int nDados)
     image *loadDados = malloc(nDados * sizeof(image));
     for (int i = 0; i < 7; i++)
     {
-        sprintf(filename, "./dados/preto-%d.pgm", i);
+        sprintf(filename, "./_dados_img/preto-%d.pgm", i);
         loadDados[i] = img_get(filename, &tmp, &tmp, &tmp, GRAY, 0);
     }
     return loadDados;
