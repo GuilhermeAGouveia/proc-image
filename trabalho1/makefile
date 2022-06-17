@@ -4,7 +4,7 @@ CCFLAGS=-g
 LDFLAGS=-lm
 SOURCES=$(wildcard *.c)
 OBJECTS=$(SOURCES:.c=.o)
-TARGET=dado
+TARGET=dados
 
 all: $(TARGET)
 

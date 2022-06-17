@@ -27,5 +27,4 @@ done
 cp -R _base $projectName
 sed -i "s/<operacao>/$execName/g" $projectName/script.c
 sed -i "s/<operacao>/$execName/g" $projectName/makefile
-echo "!$projectName" >> .gitignore
 mv $projectName/script.c $projectName/$execName.c
