@@ -39,20 +39,31 @@ void normalizeImage(image In, int nl, int nc, int maxValue)
     }
 }
 
+image *loadDados(int nDados)
+{
+    int tmp;
+    char filename[30];
+    image *loadDados = malloc(nDados * sizeof(image));
+    for (int i = 0; i < 7; i++)
+    {
+        sprintf(filename, "./dados/preto-%d.pgm", i);
+        loadDados[i] = img_get(filename, &tmp, &tmp, &tmp, GRAY, 0);
+    }
+    return loadDados;
+}
+
+void freeDados(image *listDados, int nDados)
+{
+    for (int i = 0; i < nDados; i++)
+    {
+        img_free(listDados[i]);
+    }
+}
+
 void convertIntToDado(image In, image Out, int nl, int nc)
 {
     int valorNormalizado, tmp;
-    // carregando dados
-    image listDados[7] = {
-        img_get("./dados/preto-0.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-1.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-2.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-3.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-4.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-5.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-        img_get("./dados/preto-6.pgm", &tmp, &tmp, &tmp, GRAY, 0),
-
-    };
+    image *listDados = loadDados(7);
 
     for (int i = 0; i < nl; i++)
     {
@@ -71,13 +82,11 @@ void convertIntToDado(image In, image Out, int nl, int nc)
             }
         }
     }
+    freeDados(listDados, 7);
 }
 
-void dado(image In, image Out, int nl, int nc, int mn, float scaleFator)
+void dado(image In, image Out, int nl, int nc, int mn, int nlIcone, int ncIcone)
 {
-    // Obtendo dimensoes para uma imagem com 100 de largura e um tamanho proporcional na altura
-    int ncIcone = nc * scaleFator;
-    int nlIcone = nl * scaleFator;
 
     // Transformando imagem em outra com 100 de largura e um tamanho proporcial na altura
     image Icone = img_alloc(nlIcone, ncIcone);
@@ -112,13 +121,16 @@ int main(int argc, char *argv[])
     In = img_get(nameIn, &nr, &nc, &ml, GRAY, 1);
     //-- define image factor
     float fator = (float)100 / nc;
+    // Obtendo dimensoes para uma imagem com 100 de largura e um tamanho proporcional na altura
+    int ncIcone = nc * fator;
+    int nlIcone = nr * fator;
     //-- dimensoes da imagem resultante
-    int ncResult = nc * fator * 40;
-    int nlResult = nr * fator * 40;
+    int ncResult = ncIcone * 40;
+    int nlResult = nlIcone * 40;
     //-- create output image
     Out = img_alloc(nlResult, ncResult);
     //-- transformation
-    dado(In, Out, nr, nc, ml, fator);
+    dado(In, Out, nr, nc, ml, nlIcone, ncIcone);
 
     //-- save image
     img_put(Out, nameOut, nlResult, ncResult, ml, GRAY);
