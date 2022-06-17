@@ -1,8 +1,12 @@
-/*-------------------------------------------------------------------------
- * Image Processing using C-Ansi
- *   Program: Negative from grayscale image
- * By Luiz Eduardo da Silva.
- *-------------------------------------------------------------------------*/
+/*-------------------------------------------------
+  |         Unifal - Universidade Federal de Alfenas.
+  |             BACHARELADO EM CIENCIA DA COMPUTACAO.
+  | Trabalho..: Imagem de dados
+  | Disciplina: Processamento de Imagens
+  | Professor.: Luiz Eduardo da Silva
+  | Aluno.....: Guilherme Augusto Gouveia
+  | Data......: 09/03/2022
+  -------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +14,13 @@
 #include <math.h>
 #include "imagelib.h"
 
+/**
+ * @brief Essa funcao faz com que cada valor de entrada seja normalizado para um valor entre 0 e 6
+ * 
+ * @param valor Valor de entrada
+ * @param range valor maximo da normalizacao
+ * @return int 
+ */
 int normalize(int valor, int range)
 {
     int vet[range], i = 1;
@@ -18,6 +29,17 @@ int normalize(int valor, int range)
 
     return i - 1;
 }
+
+/**
+ * @brief Essa funcao faz com que uma imagem de entrada tenha suas dimensões reduzidas
+ * 
+ * @param In Imagem de entrada
+ * @param Out Imagem de saída
+ * @param nl Numero de linhas da imagem de entrada
+ * @param nc Numero de colunas da imagem de entrada
+ * @param nlIcone Numero de linhas da imagem de saida
+ * @param ncIcone Numero de colunas da imagem de saida
+ */
 
 void iconizar(image In, image Out, int nl, int nc, int nlIcone, int ncIcone)
 {
@@ -31,6 +53,15 @@ void iconizar(image In, image Out, int nl, int nc, int nlIcone, int ncIcone)
     }
 }
 
+/**
+ * @brief Processa cada valor da imagem utilizando uma funcao
+ * 
+ * @param In Imagem de entrada
+ * @param nl Numero de linhas da imagem de entrada
+ * @param nc Numero de colunas da imagem de entrada
+ * @param maxValue Valor usado por normalize
+ */
+
 void normalizeImage(image In, int nl, int nc, int maxValue)
 {
     for (int i = 0; i < nl * nc; i++)
@@ -39,6 +70,12 @@ void normalizeImage(image In, int nl, int nc, int maxValue)
     }
 }
 
+/**
+ * @brief Carrega os dados usados na subtituição dos pixels
+ * 
+ * @param nDados Numero de dados
+ * @return image* 
+ */
 image *loadDados(int nDados)
 {
     int tmp;
@@ -52,6 +89,12 @@ image *loadDados(int nDados)
     return loadDados;
 }
 
+/**
+ * @brief Libera a memoria dos dados carregados
+ * 
+ * @param listDados Lista que contem os dados carregados
+ * @param nDados Numero de dados
+ */
 void freeDados(image *listDados, int nDados)
 {
     for (int i = 0; i < nDados; i++)
@@ -60,6 +103,14 @@ void freeDados(image *listDados, int nDados)
     }
 }
 
+/**
+ * @brief Converte cada pixel (Int) da imagem de entrada em um dado (image) na imagem de saída
+ * 
+ * @param In Imagem de entrada
+ * @param Out Imagem de saída
+ * @param nl Numero de linhas da imagem de entrada
+ * @param nc Numero de colunas da imagem de entrada
+ */
 void convertIntToDado(image In, image Out, int nl, int nc)
 {
     int valorNormalizado, tmp;
@@ -85,6 +136,17 @@ void convertIntToDado(image In, image Out, int nl, int nc)
     freeDados(listDados, 7);
 }
 
+/**
+ * @brief Procedimento que executa as operações
+ * 
+ * @param In Imagem de entrada
+ * @param Out Imagem de saída
+ * @param nl Numero de linhas da imagem de entrada
+ * @param nc Numero de colunas da imagem de entrada
+ * @param mn Maximo valor de cinza
+ * @param nlIcone Numero de linhas da imagem de saida
+ * @param ncIcone Numero de colunas da imagem de saida
+ */
 void dado(image In, image Out, int nl, int nc, int mn, int nlIcone, int ncIcone)
 {
 
