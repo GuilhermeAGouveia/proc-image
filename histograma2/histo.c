@@ -9,7 +9,7 @@
 #include <math.h>
 #include "imagelib.h"
 
-image histo(image In)
+image equaliza(image In)
 {
     int nl = In->nr;
     int nc = In->nc;
@@ -26,28 +26,21 @@ image histo(image In)
     {
         histo[i] = 0;
     }
-
+    
     for (int i = 0; i < nl * nc; i++)
     {
         histo[px[i]]++;
     }
 
-    for (int i = 0; i < mn + 1; i++)
-    {
-        pk[i] = (float)histo[i] / (nl * nc);
-    }
-
+    pk[0] = (float)histo[0] / (nl * nc);
     ak[0] = pk[0];
+    sk[0] = ak[0] * mn;
     for (int i = 1; i < mn + 1; i++)
     {
+        pk[i] = (float)histo[i] / (nl * nc);
         ak[i] = ak[i - 1] + pk[i];
-    }
-
-    for (int i = 0; i < mn + 1; i++)
-    {
         sk[i] = ak[i] * mn;
     }
-
     for (int i = 0; i < nc * nl; i++)
     {
         Out->px[i] = sk[px[i]];
@@ -80,7 +73,7 @@ int main(int argc, char *argv[])
     //-- read image
     In = img_get(nameIn, GRAY);
     //-- transformation
-    Out = histo(In);
+    Out = equaliza(In);
     //-- save image
     img_put(Out, nameOut, GRAY);
 
