@@ -12,6 +12,27 @@
 
 #define DEBUG(x)
 
+int convert_base64_to_int(char c)
+{
+    if (c >= 'A' && c <= 'Z')
+        return c - 'A';
+    if (c >= 'a' && c <= 'z')
+        return c - 'a' + 26;
+    if (c >= '0' && c <= '9')
+        return c - '0' + 52;
+    if (c == '+')
+        return 62;
+    if (c == '/')
+        return 63;
+    return -1;
+}
+
+int concat_binary(int a, u_int b){
+    printf("%d", b);
+    return (a << 6) | b;
+}
+  
+
 void msg(char *s)
 {
     printf("\nNegative image");
@@ -41,6 +62,7 @@ int main(int argc, char *argv[])
     In->code = code;
     //-- transformation
     printf("Codigo da imagem: %s\n", In->code);
+    printf("binario: %d\n", concat_binary(0x000000, 0x100111));
     //-- save image
     img_put(In, nameOut);
     sprintf(cmd, "%s %s &", VIEW, nameOut);
