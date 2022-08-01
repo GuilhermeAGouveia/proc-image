@@ -1,0 +1,7 @@
+Make lib from c source
+
+Generate a lib from c source.
+>gcc -o libname.o -c libname.c
+
+Compil code use libname
+>gcc -o progname progname.c libname.o

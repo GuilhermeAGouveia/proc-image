@@ -13,9 +13,9 @@
 void operacao(image In, image Out, int nl, int nc, int mn)
 {
     int w[3][3] = {
-        {-1, -1, -1},
+        {-1, -2, -1},
         {0, 0, 0},
-        {1, 1, 1}};
+        {1, 2, 1}};
 
     for (int i = 1; i < nl - 1; i++)
         for (int j = 1; j < nc - 1; j++)
