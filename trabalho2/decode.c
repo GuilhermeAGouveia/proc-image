@@ -75,18 +75,15 @@ void msg(char *s)
  *-------------------------------------------------------------------------*/
 int main(int argc, char *argv[])
 {
-    char nameIn[100], nameOut[100], cmd[110], code[MAX_CODE_LENGTH];
+    char nameIn[100], nameOut[100], cmd[110];
     image_l64 In;
     image Out;
     if (argc < 2)
         msg(argv[0]);
 
     imgl64_name(argv[1], nameIn, nameOut);
-
     //-- read image
-    In = imgl64_get(nameIn, code);
-    In->code = code;
-
+    In = imgl64_get(nameIn);
     //-- transformation
     Out = decode(In);
     //-- save image

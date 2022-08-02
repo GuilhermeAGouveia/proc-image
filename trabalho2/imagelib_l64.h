@@ -23,5 +23,5 @@ image_l64 imgl64_create(int, int);
 image_l64 imgl64_clone(image_l64);
 int imgl64_free(image_l64);
 void imgl64_name(char *, char *, char *);
-image_l64 imgl64_get(char *, char *);
+image_l64 imgl64_get(char *);
 void imgl64_put(image_l64, char *);
