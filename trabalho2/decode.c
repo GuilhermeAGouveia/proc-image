@@ -9,6 +9,8 @@
 #include <string.h>
 #include <math.h>
 #include "imagelib_l64.h"
+#include "imagelib.h"
+#include "lzw.h"
 
 #define DEBUG(x)
 
@@ -27,11 +29,37 @@ int convert_base64_to_int(char c)
     return -1;
 }
 
-int concat_binary(int a, u_int b){
+int concat_binary(int a, int b){
     printf("%d", b);
-    return (a << 6) | b;
+    return a * 64 + b;
 }
-  
+
+image decode(image_l64 img_code){
+    char *code = img_code->code;
+    char caracter1, caracter2;
+    int int_decode;
+
+    image image_decode = img_create(img_code->nr, img_code->nc, 255, GRAY);
+    int *px = image_decode->px;
+
+    int count = 0; // conta quantos inteiro foram decodificados a partir da string base64
+    while (*code){
+        caracter1 = *(code++);
+        caracter2 = *(code++);
+
+        int_decode = concat_binary(convert_base64_to_int(caracter1), convert_base64_to_int(caracter2));
+        *px = int_decode;
+        px++;
+        count++;
+    }
+
+    int * out = malloc(img_code->nc * img_code->nr * sizeof(int));
+
+    decodifica_lzw(image_decode->px, count, out);
+
+    image_decode->px = out;
+    return image_decode;
+}
 
 void msg(char *s)
 {
@@ -50,23 +78,24 @@ int main(int argc, char *argv[])
 {
     char nameIn[100], nameOut[100], cmd[110], code[MAX_CODE_LENGTH];
     image_l64 In;
-    image_l64 Out;
+    image Out;
     if (argc < 2)
         msg(argv[0]);
 
-    img_name(argv[1], nameIn, nameOut);
+    imgl64_name(argv[1], nameIn, nameOut);
 
     //-- read image
     printf("a");
-    In = img_get(nameIn, code);
+    In = imgl64_get(nameIn, code);
     In->code = code;
+
     //-- transformation
-    printf("Codigo da imagem: %s\n", In->code);
-    printf("binario: %d\n", concat_binary(0x000000, 0x100111));
+    Out = decode(In);
     //-- save image
-    img_put(In, nameOut);
+    img_put(Out, nameOut, GRAY);
     sprintf(cmd, "%s %s &", VIEW, nameOut);
     system(cmd);
-    img_free(In);
+    imgl64_free(In);
+    img_free(Out);
     return 0;
 }

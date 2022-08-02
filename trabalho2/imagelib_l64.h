@@ -11,12 +11,6 @@ typedef struct
     if (x)          \
     y
 
-enum
-{
-    BW = 1,
-    GRAY,
-    COLOR
-};
 
 #if defined(_WIN32) || defined(__WIN64__) || defined(__CYGWIN__)
 #define VIEW "./i_view32"
@@ -24,10 +18,10 @@ enum
 #define VIEW "eog"
 #endif
 
-void errormsg(char *, ...);
-image_l64 img_create(int, int);
-image_l64 img_clone(image_l64);
-int img_free(image_l64);
-void img_name(char *, char *, char *);
-image_l64 img_get(char *, char *);
-void img_put(image_l64, char *);
+void errormsg_l64(char *, ...);
+image_l64 imgl64_create(int, int);
+image_l64 imgl64_clone(image_l64);
+int imgl64_free(image_l64);
+void imgl64_name(char *, char *, char *);
+image_l64 imgl64_get(char *, char *);
+void imgl64_put(image_l64, char *);
