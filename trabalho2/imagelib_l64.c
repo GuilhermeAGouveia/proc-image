@@ -16,7 +16,7 @@
 image_l64 imgl64_create(int nr, int nc)
 {
     image_l64 img = malloc(sizeof(image_l64 *));
-    // img->code = malloc(1000000 * sizeof(char));
+    //img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
     img->nr = nr;
     img->nc = nc;
     return img;
@@ -82,6 +82,19 @@ void errormsg_l64(char *str, ...)
     exit(1);
 }
 
+void concat_string(char *str1, char *str2)
+{
+    int i, j;
+    for (; *str1; str1++)
+        ;
+    for (; *str2; str2++) {
+        *str1 = *str2;
+        str1++;
+    }
+    *str1 = 0;
+    puts("aqui");
+}
+
 void remove_newline(char *str)
 {
     for (; *str; str++)
@@ -99,8 +112,9 @@ void remove_newline(char *str)
  * Returns:
  *   image_l64 structure
  *-------------------------------------------------------------------------+*/
-image_l64 imgl64_get(char *name, char *code)
+image_l64 imgl64_get(char *name)
 {
+    ("aqui1");
     char lines[100];
     int nr, nc;
     image_l64 img;
@@ -115,19 +129,23 @@ image_l64 imgl64_get(char *name, char *code)
         fgets(lines, 80, fimg);
     sscanf(lines, "%d %d", &nc, &nr);
     ERROR(nc == 0 || nr == 0, errormsg_l64("image_l64 dimensions error: <%s>", name));
+    ("aqui2");
     img = imgl64_create(nr, nc);
+    img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
+
+    ("aqui3");
+    
     ERROR(!img, errormsg_l64("image_l64 allocation error: %s\n\n imgl64_get routine", name));
     int count = 0;
     fgets(lines, 100, fimg);
+    ("aqui");
     while (lines[0] != '\n')
     {
         remove_newline(lines);
-        strcat(code, lines);
-        fgets(lines, 100, fimg);
+        strcat(img->code, lines);
+        fgets(lines, 1000, fimg);
     }
-    // printf("Code: %s\n", temp);
-    // strcpy(code, temp);
-    // printf("Code IMG: %s\n", code);
+
     fclose(fimg);
 
     imgl64_info(name, img);
