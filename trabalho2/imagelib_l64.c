@@ -46,7 +46,7 @@ void imgl64_name(char *name, char *in, char *out)
     if (p)
         *p = 0;
     sprintf(in, "%s%s", name, ".l64");
-    sprintf(out, "%s-result%s", name, ".l64");
+    sprintf(out, "%s-result%s", name, ".pgm");
 }
 
 /*-------------------------------------------------------------------------

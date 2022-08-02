@@ -14,6 +14,12 @@
 
 #define DEBUG(x)
 
+/**
+ * @brief Função que converte caracteres base64 para seus inteiros binários correspondentes
+ * 
+ * @param c Caracter que será convertido
+ * @return int 
+ */
 int convert_base64_to_int(char c)
 {
     if (c >= 'A' && c <= 'Z')
