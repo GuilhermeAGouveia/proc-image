@@ -30,7 +30,6 @@ int convert_base64_to_int(char c)
 }
 
 int concat_binary(int a, int b){
-    printf("%d", b);
     return a * 64 + b;
 }
 
@@ -85,7 +84,6 @@ int main(int argc, char *argv[])
     imgl64_name(argv[1], nameIn, nameOut);
 
     //-- read image
-    printf("a");
     In = imgl64_get(nameIn, code);
     In->code = code;
 

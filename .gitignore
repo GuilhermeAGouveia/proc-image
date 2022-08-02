@@ -20,7 +20,7 @@
 !_imagens/*.pgm
 
 # Negando todos os arquivos com result no nome (gerados durante o processamento de imagens
-*-result.p*m
+*-result.*
 
 # Negando todos os arquivos com extensao .o
 *.o
