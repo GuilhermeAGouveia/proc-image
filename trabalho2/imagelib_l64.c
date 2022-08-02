@@ -161,7 +161,7 @@ void imgl64_put(image_l64 img, char *name)
     int count;
     FILE *fimg;
     ERROR((fimg = fopen(name, "wt")) == NULL, errormsg_l64("image_l64 creation error: <%s>", name));
-    fprintf(fimg, "lzw-b64\n", name);
+    fprintf(fimg, "lzw-b64\n");
     fputs(CREATOR, fimg);
     fprintf(fimg, "%d  %d\n", img->nc, img->nr);
     count = 0;
