@@ -129,16 +129,13 @@ image_l64 imgl64_get(char *name)
         fgets(lines, 80, fimg);
     sscanf(lines, "%d %d", &nc, &nr);
     ERROR(nc == 0 || nr == 0, errormsg_l64("image_l64 dimensions error: <%s>", name));
-    ("aqui2");
     img = imgl64_create(nr, nc);
     img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
 
-    ("aqui3");
     
     ERROR(!img, errormsg_l64("image_l64 allocation error: %s\n\n imgl64_get routine", name));
     int count = 0;
     fgets(lines, 100, fimg);
-    ("aqui");
     while (lines[0] != '\n')
     {
         remove_newline(lines);
