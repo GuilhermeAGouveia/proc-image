@@ -1,7 +1,12 @@
-/*-------------------------------------------------------------------------
- * Tranformação de intensidade
- * Por Luiz Eduardo da Silva.
- *-------------------------------------------------------------------------*/
+/*-------------------------------------------------
+  |         Unifal - Universidade Federal de Alfenas.
+  |             BACHARELADO EM CIENCIA DA COMPUTACAO.
+  | Trabalho..: Descompactador do formato LZW-Base64
+  | Disciplina: Processamento de Imagens
+  | Professor.: Luiz Eduardo da Silva
+  | Aluno.....: Guilherme Augusto Gouveia
+  | Data......: 02/08/2022
+  -------------------------------------------------*/
 
 
 #include <stdio.h>
@@ -68,11 +73,9 @@ image decode(image_l64 img_code){
 
 void msg(char *s)
 {
-    printf("\nNegative image");
+    printf("\nDescompactador do formato LZW-Base64");
     printf("\n-------------------------------");
-    printf("\nUsage:  %s  image-name[.pnm] tp\n\n", s);
-    printf("    image-name[.pnm] is image file file \n");
-    printf("    tp = image type (1 = BW, 2 = Gray, 3 = Color)\n\n");
+    printf("\nUsage:  %s  image-name[.l64]\n\n", s);
     exit(1);
 }
 

@@ -1,3 +1,13 @@
+/*-------------------------------------------------
+  |         Unifal - Universidade Federal de Alfenas.
+  |             BACHARELADO EM CIENCIA DA COMPUTACAO.
+  | Trabalho..: Descompactador do formato LZW-Base64
+  | Disciplina: Processamento de Imagens
+  | Professor.: Luiz Eduardo da Silva
+  | Aluno.....: Guilherme Augusto Gouveia
+  | Data......: 02/08/2022
+  -------------------------------------------------*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
