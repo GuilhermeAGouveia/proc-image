@@ -13,25 +13,29 @@
 #include <string.h>
 #include "lzw.h"
 
-typedef struct alocaInfo {
+typedef struct alocaInfo
+{
     int *base;
     int tam;
     int *proxAloca;
 } alocaInfo;
 
-void iniciaAloca (alocaInfo *aloc, int tam) {
+void iniciaAloca(alocaInfo *aloc, int tam)
+{
     aloc->base = malloc(tam);
     aloc->tam = tam;
     aloc->proxAloca = aloc->base;
 }
 
-int *aloca(alocaInfo *aloc, int len) {
+int *aloca(alocaInfo *aloc, int len)
+{
     int *ret = aloc->proxAloca;
     aloc->proxAloca += len;
     return ret;
 }
 
-void codifica_lzw(int *in, int n){
+void codifica_lzw(int *in, int n)
+{
     int dicionario[TAM_DICT][NUM_SIMB];
     int posDict;
     int simbolo;
@@ -47,12 +51,15 @@ void codifica_lzw(int *in, int n){
         int prox = dicionario[corrent][simbolo];
         if (prox != 0)
         {
-           corrent = prox;
-        } else {
+            corrent = prox;
+        }
+        else
+        {
             printf("[%d]", corrent);
             if (posDict < TAM_DICT)
                 dicionario[corrent][simbolo] = posDict++;
-            else {
+            else
+            {
                 memset(dicionario, 0, TAM_DICT * NUM_SIMB * sizeof(int));
                 posDict = NUM_SIMB;
             }
@@ -63,9 +70,11 @@ void codifica_lzw(int *in, int n){
     printf("[%d]", corrent);
 }
 
-int * decodifica_lzw (int *in, int n, int *out) {
+int *decodifica_lzw(int *in, int n, int *out)
+{
 
-        struct {
+    struct
+    {
         int *seq;
         int tam;
     } dicionario[TAM_DICT];
@@ -78,11 +87,11 @@ int * decodifica_lzw (int *in, int n, int *out) {
 
     iniciaAloca(&aInfo, TAM_DICT * TAM_DICT * sizeof(int));
     marca = aInfo.proxAloca;
-    for (int i = 0; i < NUM_SIMB; i++) {
+    for (int i = 0; i < NUM_SIMB; i++)
+    {
         dicionario[i].seq = aloca(&aInfo, 1);
         dicionario[i].seq[0] = i;
         dicionario[i].tam = 1;
-
     }
 
     posDict = NUM_SIMB;
@@ -92,33 +101,37 @@ int * decodifica_lzw (int *in, int n, int *out) {
 
     i = 1;
     int j = 1;
-    while (i < n) {
+    while (i < n)
+    {
         int simbolo = in[i++];
-        if (posDict == TAM_DICT) {
+        if (posDict == TAM_DICT)
+        {
             aInfo.proxAloca = marca;
-            for (int i = 0; i< NUM_SIMB; i++) {
+            for (int i = 0; i < NUM_SIMB; i++)
+            {
                 dicionario[i].seq = aloca(&aInfo, 1);
                 dicionario[i].seq[0] = i;
                 dicionario[i].tam = 1;
             }
             posDict = NUM_SIMB;
-
-        } else {
+        }
+        else
+        {
             int tam = dicionario[anterior].tam;
             dicionario[posDict].tam = tam + 1;
             dicionario[posDict].seq = aloca(&aInfo, tam + 1);
-            for (int k = 0; k < tam; k++) {
+            for (int k = 0; k < tam; k++)
+            {
                 dicionario[posDict].seq[k] = dicionario[anterior].seq[k];
             }
             if (simbolo == posDict)
                 dicionario[posDict++].seq[tam] = dicionario[anterior].seq[0];
-            else 
+            else
                 dicionario[posDict++].seq[tam] = dicionario[simbolo].seq[0];
-
-
         }
 
-        for (int k = 0; k < dicionario[simbolo].tam; k++) {
+        for (int k = 0; k < dicionario[simbolo].tam; k++)
+        {
             out[j++] = dicionario[simbolo].seq[k];
         }
 

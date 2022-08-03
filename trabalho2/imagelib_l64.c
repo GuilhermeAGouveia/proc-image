@@ -26,7 +26,7 @@
 image_l64 imgl64_create(int nr, int nc)
 {
     image_l64 img = malloc(sizeof(image_l64 *));
-    //img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
+    // img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
     img->nr = nr;
     img->nc = nc;
     return img;
@@ -97,7 +97,8 @@ void concat_string(char *str1, char *str2)
     int i, j;
     for (; *str1; str1++)
         ;
-    for (; *str2; str2++) {
+    for (; *str2; str2++)
+    {
         *str1 = *str2;
         str1++;
     }
@@ -142,7 +143,6 @@ image_l64 imgl64_get(char *name)
     img = imgl64_create(nr, nc);
     img->code = malloc(MAX_CODE_LENGTH * sizeof(char));
 
-    
     ERROR(!img, errormsg_l64("image_l64 allocation error: %s\n\n imgl64_get routine", name));
     int count = 0;
     fgets(lines, 100, fimg);
@@ -175,8 +175,10 @@ void imgl64_put(image_l64 img, char *name)
     fputs(CREATOR, fimg);
     fprintf(fimg, "%d  %d\n", img->nc, img->nr);
     count = 0;
-    for (char * p = img->code; *p; p++){
-        if (count == PER_LINE){
+    for (char *p = img->code; *p; p++)
+    {
+        if (count == PER_LINE)
+        {
             fprintf(fimg, "\n");
             count = 0;
         }

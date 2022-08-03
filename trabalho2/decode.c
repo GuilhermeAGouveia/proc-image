@@ -8,7 +8,6 @@
   | Data......: 02/08/2022
   -------------------------------------------------*/
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,9 +20,9 @@
 
 /**
  * @brief Função que converte caracteres base64 para seus inteiros binários correspondentes
- * 
+ *
  * @param c Caracter que será convertido
- * @return int 
+ * @return int
  */
 int convert_base64_to_int(char c)
 {
@@ -40,11 +39,13 @@ int convert_base64_to_int(char c)
     return -1;
 }
 
-int concat_binary(int a, int b){
+int concat_binary(int a, int b)
+{
     return a * 64 + b;
 }
 
-image decode(image_l64 img_code){
+image decode(image_l64 img_code)
+{
     char *code = img_code->code;
     char caracter1, caracter2;
     int int_decode;
@@ -53,7 +54,8 @@ image decode(image_l64 img_code){
     int *px = image_decode->px;
 
     int count = 0; // conta quantos inteiro foram decodificados a partir da string base64
-    while (*code){
+    while (*code)
+    {
         caracter1 = *(code++);
         caracter2 = *(code++);
 
@@ -63,7 +65,7 @@ image decode(image_l64 img_code){
         count++;
     }
 
-    int * out = malloc(img_code->nc * img_code->nr * sizeof(int));
+    int *out = malloc(img_code->nc * img_code->nr * sizeof(int));
 
     decodifica_lzw(image_decode->px, count, out);
 
