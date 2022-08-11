@@ -145,14 +145,17 @@ image_l64 imgl64_get(char *name)
 
     ERROR(!img, errormsg_l64("image_l64 allocation error: %s\n\n imgl64_get routine", name));
     int count = 0;
-    fgets(lines, 100, fimg);
-    while (lines[0] != '\n')
+
+    while (1)
     {
+        if (!fgets(lines, 100, fimg) || ferror(fimg) || feof(fimg))
+        {
+            break;
+        }
         remove_newline(lines);
         strcat(img->code, lines);
-        fgets(lines, 1000, fimg);
     }
-
+    
     fclose(fimg);
 
     imgl64_info(name, img);
