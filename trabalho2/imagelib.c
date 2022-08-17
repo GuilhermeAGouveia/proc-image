@@ -163,29 +163,31 @@ void img_put(image img, char *name, int tp)
     ERROR((fimg = fopen(name, "wt")) == NULL, errormsg("Image creation error: <%s>", name));
     fprintf(fimg, "P%c\n", tp + '0');
     fputs(CREATOR, fimg);
-    fprintf(fimg, "%d  %d\n", img->nc, img->nr);
+    fprintf(fimg, "%d  %d\n", img->nr, img->nc);
     if (tp != BW)
         fprintf(fimg, "%d\n", img->ml);
     count = 0;
-    for (int i = 0; i < img->nr * img->nc; i++)
+    for (int i = 0; i < img->nr; i++)
     {
-        if (tp != COLOR)
-        {
-            int x = img->px[i];
-            fprintf(fimg, "%3d ", x);
-        }
-        else
-        {
-            int r = (img->px[i] >> 16) & 0xFF;
-            int g = (img->px[i] >> 8) & 0xFF;
-            int b = img->px[i] & 0xFF;
-            fprintf(fimg, "%3d %3d %3d ", r, g, b);
-        }
-        count++;
-        if (count > PER_LINE)
-        {
-            fprintf(fimg, "\n");
-            count = 0;
+        for (int j = 0; j < img->nc; j++) {
+            if (tp != COLOR)
+            {
+                int x = img->px[i * img->nc + j];
+                fprintf(fimg, "%3d ", x);
+            }
+            else
+            {
+                int r = (img->px[i] >> 16) & 0xFF;
+                int g = (img->px[i] >> 8) & 0xFF;
+                int b = img->px[i] & 0xFF;
+                fprintf(fimg, "%3d %3d %3d ", r, g, b);
+            }
+            count++;
+            if (count > PER_LINE)
+            {
+                fprintf(fimg, "\n");
+                count = 0;
+            }
         }
     }
     fclose(fimg);
